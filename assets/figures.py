@@ -13,9 +13,9 @@ def time_series_chart(df):
             yaxis='y1',
             line=dict(color='royalblue'),
             marker = dict(
-                color='gray',  # Set color of markers
-                size=8,  # Marker size
-                line=dict(width=1, color='gray')  # Border color for markers
+                color='gray',
+                size=8,
+                line=dict(width=1, color='gray')
             ),
         )
     )
@@ -28,9 +28,9 @@ def time_series_chart(df):
             yaxis='y2',
             line=dict(color='limegreen'),
             marker = dict(
-                color='gray',  # Set color of markers
-                size=8,  # Marker size
-                line=dict(width=1, color='gray')  # Border color for markers
+                color='gray',
+                size=8,
+                line=dict(width=1, color='gray')
             ),
         )
     )
@@ -40,25 +40,25 @@ def time_series_chart(df):
         font=dict(color='gray'),
         xaxis=dict(
             title='Date',
-            ticks='outside',  # Ensure x-axis ticks show inside
+            ticks='outside',
             showline=True,
             linecolor='gray',
         ),
         yaxis=dict(
             title=dict(text='Screen Time (hrs)', font=dict(color='gray')),
             range=[0, 12],
-            ticks='outside',  # Ensure y1 axis ticks show inside
+            ticks='outside',
             showticklabels=True,
             showline=True,
             linecolor='gray',
         ),
         yaxis2=dict(
             title=dict(text='Happiness Index', font=dict(color='gray')),
-            range=[0, 20],  # Ensuring fixed range for the second axis
-            ticks='outside',  # Ensure y2 axis ticks show inside
-            anchor='x',  # Ensures y2 is aligned with the x-axis
-            overlaying='y',  # Overlay y2 on top of y1 axis
-            side='right',  # Position y2 on the right side
+            range=[0, 20],
+            ticks='outside',
+            anchor='x',
+            overlaying='y',
+            side='right',
             showticklabels=True,
             showline=True,
             linecolor='gray',
@@ -77,8 +77,6 @@ def scatter_fig(df):
     # Separate screen time groups
     df_under_9 = df[df['Daily_Screen_Time'] < 7.5].dropna().sample(50, random_state=1)
     df_over_9 = df[df['Daily_Screen_Time'] >= 9].dropna().sample(150, random_state=2)
-
-    # Combine and copy
     df_clean = pd.concat([df_under_9, df_over_9]).copy()
 
     # Exaggerate Happiness Index values
@@ -86,7 +84,7 @@ def scatter_fig(df):
         lambda x: np.random.uniform(0, 2) if x < 9 else np.random.uniform(18, 25)
     )
 
-    # Add jitter to both x and y
+    # Add jitter/randomness to both x and y
     df_clean['Jittered_Screen_Time'] = df_clean['Daily_Screen_Time'] + np.random.normal(0, 0.3, len(df_clean))
     df_clean['Jittered_Happiness'] = df_clean['Happiness_Index'] + np.random.normal(0, 0.5, len(df_clean))
 
@@ -96,7 +94,6 @@ def scatter_fig(df):
     x_range = np.linspace(df_clean['Jittered_Screen_Time'].min(), df_clean['Jittered_Screen_Time'].max(), 200)
     y_trend = trendline(x_range)
 
-    # Build plot
     fig = go.Figure()
 
     fig.add_trace(
@@ -158,7 +155,7 @@ def scatter_fig(df):
             y=1.15,
             xanchor='right',
             yanchor='top',
-            bgcolor='rgba(255, 255, 255, 0.7)',  # optional: semi-transparent background
+            bgcolor='rgba(255, 255, 255, 0.7)',
             bordercolor='gray',
             borderwidth=1,
             font=dict(color='gray')
@@ -200,10 +197,10 @@ def correlation_heatmap(df):
     )
     fig.update_layout(
         margin=dict(l=40, r=40, b=50, t=50),
-        width=600,  # Set a fixed width
-        height=500,  # Optional, keep it balanced
+        width=600,
+        height=500,
         coloraxis_colorbar=dict(
-            x=1.2,  # MUCH closer to the heatmap
+            x=1.2,
             thickness=15,
             title='Correlation',
             tickvals=[-1, -0.5, 0, 0.5, 1]

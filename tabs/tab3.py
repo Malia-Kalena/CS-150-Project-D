@@ -65,8 +65,8 @@ def tab3_layout():
                                             n_clicks=0,
                                             className="btn btn-primary w-100"
                                 ),
-                                width=3,  # Adjust width to control the button size
-                                className="mb-2"  # Add some margin to space out the buttons
+                                width=3,
+                                className="mb-2"
                             ),
                             dbc.Col(
                                 html.Button("📤 Share Your Results",
@@ -74,7 +74,7 @@ def tab3_layout():
                                             n_clicks=0,
                                             className="btn btn-secondary w-100"
                                 ),
-                                width=3  # Same width to keep them even
+                                width=3
                             )
                         ],
                         justify="center"
